@@ -1,0 +1,32 @@
+[versions]
+springboot = "3.3.4"
+dependencyManagement = "1.1.6"
+springDocVersion = "2.6.0"
+commons-math3 = "3.6.1"
+guava = "33.2.1-jre"
+shadow = "8.1.1"
+spotless = "6.25.0"
+asm = "9.7.1"
+junit-jupiter = "5.10.3"
+sonarqube = "5.1.0.4882"
+
+[plugins]
+springboot-web = { id = "org.springframework.boot", version.ref = "springboot" }
+dependency-management = { id = "io.spring.dependency-management", version.ref = "dependencyManagement" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
+
+[libraries]
+springboot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+springboot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "springboot" }
+springdoc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springDocVersion" }
+springboot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+springboot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+commons-math3 = { module = "org.apache.commons:commons-math3", version.ref = "commons-math3" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+springboot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+lombok = { module = "org.projectlombok:lombok" }
