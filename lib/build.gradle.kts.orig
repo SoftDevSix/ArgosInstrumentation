@@ -1,0 +1,109 @@
+plugins {
+    java
+    `java-library`
+<<<<<<< HEAD:build.gradle.kts
+	 jacoco
+    alias(libs.plugins.springboot) apply true
+    alias(libs.plugins.dependency.management) apply true
+||||||| parent of 2da96a7 (chore: create gradle lib project):build.gradle.kts
+	 `jacoco`
+    alias(libs.plugins.springboot) apply true
+    alias(libs.plugins.dependency.management) apply true
+=======
+    `jacoco`
+    alias(libs.plugins.springboot) apply false
+    alias(libs.plugins.dependency.management) apply false
+>>>>>>> 2da96a7 (chore: create gradle lib project):lib/build.gradle.kts
+    alias(libs.plugins.shadow) apply true
+    alias(libs.plugins.spotless) apply true
+    alias(libs.plugins.sonarqube) apply true
+    alias(libs.plugins.lombok) apply true
+}
+
+group = "org.argos"
+version = "0.0.1-SNAPSHOT"
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(libs.springboot.starter)
+    implementation(libs.asm)
+    implementation(libs.logback)
+    // implementation(libs.springboot.devtools)
+    // testImplementation(libs.springboot.starter.test)
+    testRuntimeOnly(libs.junit.launcher)
+}
+
+tasks.test {
+    testLogging {
+        events("failed", "skipped")
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+        showStandardStreams = true
+    }
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            "Premain-Class" to "org.argos.Agent"
+        )
+    }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat("1.24.0").aosp()
+            .reflowLongStrings()
+            .formatJavadoc(false)
+            .reorderImports(false)
+    }
+}
+
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            useJUnitJupiter(libs.versions.junit.jupiter.get())
+        }
+    }
+}
+
+sonar {
+    val sonarProjectKey = System.getenv("SONAR_PROJECT_KEY") ?: ""
+    val sonarHostUrl = System.getenv("SONAR_HOST_URL") ?: ""
+    val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
+    properties {
+        property("sonar.projectKey", sonarProjectKey)
+        property("sonar.host.url", sonarHostUrl)
+        property("sonar.token", sonarToken)
+        property("sonar.qualitygate.wait", "true")
+    }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
+    }
+}

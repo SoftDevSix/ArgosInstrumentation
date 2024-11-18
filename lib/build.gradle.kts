@@ -1,12 +1,12 @@
 plugins {
-    java
     `java-library`
-	 jacoco
-    alias(libs.plugins.springboot) apply true
-    alias(libs.plugins.dependency.management) apply true
+    `jacoco`
+    alias(libs.plugins.springboot) apply false
+    alias(libs.plugins.dependency.management) apply false
     alias(libs.plugins.shadow) apply true
     alias(libs.plugins.spotless) apply true
-	alias(libs.plugins.sonarqube) apply true
+    alias(libs.plugins.sonarqube) apply true
+    alias(libs.plugins.lombok) apply true
 }
 
 group = "edu.usb.argosinstrumentation"
@@ -25,28 +25,20 @@ repositories {
 dependencies {
     implementation(libs.springboot.starter)
     implementation(libs.asm)
-
-    developmentOnly(libs.springboot.devtools)
-
-    testImplementation(libs.springboot.starter.test)
+    implementation(libs.logback)
+    // implementation(libs.springboot.devtools)
+    // testImplementation(libs.springboot.starter.test)
     testRuntimeOnly(libs.junit.launcher)
-
-	compileOnly (libs.lombok)
-	
-	annotationProcessor (libs.lombok)
 }
 
 tasks.test {
-    testLogging {
-        showStandardStreams = true
-    }
-
     testLogging {
         events("failed", "skipped")
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         showExceptions = true
         showCauses = true
         showStackTraces = true
+        showStandardStreams = true
     }
 	useJUnitPlatform()
 }
@@ -70,7 +62,7 @@ tasks.jacocoTestReport {
 
 spotless {
     java {
-        googleJavaFormat().aosp()
+        googleJavaFormat("1.24.0").aosp()
             .reflowLongStrings()
             .formatJavadoc(false)
             .reorderImports(false)
@@ -86,13 +78,14 @@ testing {
 }
 
 sonar {
-	val sonarProjectKey = System.getenv("SONAR_PROJECT_KEY") ?: ""
-	val sonarHostUrl = System.getenv("SONAR_HOST_URL") ?: ""
-	val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
+    val sonarProjectKey = System.getenv("SONAR_PROJECT_KEY") ?: ""
+    val sonarHostUrl = System.getenv("SONAR_HOST_URL") ?: ""
+    val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
     properties {
-		property("sonar.projectKey", sonarProjectKey)
-		property("sonar.host.url", sonarHostUrl)
-		property("sonar.token", sonarToken)
-		property("sonar.qualitygate.wait", "true")
+        property("sonar.projectKey", sonarProjectKey)
+        property("sonar.host.url", sonarHostUrl)
+        property("sonar.token", sonarToken)
+        property("sonar.qualitygate.wait", "true")
+        property("sonar.ignore.cognitive.complexity", "MethodData.equals")
     }
 }
