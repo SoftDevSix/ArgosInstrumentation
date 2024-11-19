@@ -1,7 +1,7 @@
 plugins {
-    application
     `java-library`
-    alias(libs.plugins.springboot.web) apply true
+	 `jacoco`
+    alias(libs.plugins.springboot) apply true
     alias(libs.plugins.dependency.management) apply true
     alias(libs.plugins.shadow) apply true
     alias(libs.plugins.spotless) apply true
@@ -22,25 +22,32 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.springboot.starter.web)
     implementation(libs.springboot.starter)
-    implementation(libs.springdoc.openapi)
+    implementation(libs.asm)
+
     developmentOnly(libs.springboot.devtools)
+
     testImplementation(libs.springboot.starter.test)
     testRuntimeOnly(libs.junit.launcher)
-    implementation(libs.asm)
-    implementation(libs.commons.math3)
-    implementation(libs.guava)
+
 	compileOnly (libs.lombok)
+	
 	annotationProcessor (libs.lombok)
 }
 
-application {
-    mainClass.set("edu.usb.argosinstrumentation.ArgosInstrumentationApplication")
-}
+tasks.test {
+    testLogging {
+        showStandardStreams = true
+    }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+    testLogging {
+        events("failed", "skipped")
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+    }
+	useJUnitPlatform()
 }
 
 tasks.withType<Jar> {
