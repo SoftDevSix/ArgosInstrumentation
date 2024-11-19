@@ -1,4 +1,5 @@
 plugins {
+    java
     `java-library`
 	 `jacoco`
     alias(libs.plugins.springboot) apply true
