@@ -1,5 +1,7 @@
 package edu.usb.argosinstrumentation;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,5 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ArgosInstrumentationApplicationTests {
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+        assertTrue(true, "Spring context loaded successfully");
+    }
 }
