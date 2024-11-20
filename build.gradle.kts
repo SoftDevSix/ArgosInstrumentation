@@ -1,7 +1,7 @@
 plugins {
     java
     `java-library`
-	 `jacoco`
+	 jacoco
     alias(libs.plugins.springboot) apply true
     alias(libs.plugins.dependency.management) apply true
     alias(libs.plugins.shadow) apply true
@@ -56,6 +56,15 @@ tasks.withType<Jar> {
         attributes(
             "Premain-Class" to "org.coverage.Agent"
         )
+    }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
     }
 }
 
