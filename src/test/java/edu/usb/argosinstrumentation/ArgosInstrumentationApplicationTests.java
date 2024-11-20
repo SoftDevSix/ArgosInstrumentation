@@ -1,20 +1,18 @@
 package edu.usb.argosinstrumentation;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class ArgosInstrumentationApplicationTests {
 
-    @Autowired
-    private ApplicationContext applicationContext;
+    @Autowired private ApplicationContext applicationContext;
 
-    @Autowired
-    private ArgosInstrumentationApplication application;
+    @Autowired private ArgosInstrumentationApplication application;
 
     @Test
     void contextLoadsMessage() {
@@ -28,7 +26,7 @@ class ArgosInstrumentationApplicationTests {
 
     @Test
     void mainMethodShouldStartApplication() {
-        ArgosInstrumentationApplication.main(new String[]{});
+        ArgosInstrumentationApplication.main(new String[] {});
         assertNotNull(applicationContext, "Application context should be initialized");
     }
 
