@@ -1,11 +1,14 @@
 package edu.usb.argosinstrumentation.CoverageAdapter;
 
+import lombok.Builder;
+import lombok.Getter;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
+@Getter
 public class CoverageAdapter extends ClassVisitor implements Opcodes {
-    String className;
+    private String className;
 
     public CoverageAdapter(ClassVisitor cv, String className) {
         super(Opcodes.ASM5, cv);
