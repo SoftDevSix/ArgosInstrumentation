@@ -1,5 +1,6 @@
-package edu.usb.argosinstrumentation.InformationCollector;
+package edu.usb.argosinstrumentation.informationCollector;
 
+import edu.usb.argosinstrumentation.domain.ClassData;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor; 
 import org.objectweb.asm.Opcodes;
@@ -17,6 +18,6 @@ public class InformationCollector extends ClassVisitor implements Opcodes {
   @Override
   public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
     MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
-    return new Counter(mv, classData, name, desc);
+    return null;
   }
 }
