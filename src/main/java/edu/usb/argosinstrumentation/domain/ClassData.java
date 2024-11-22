@@ -4,19 +4,17 @@ import edu.usb.argosinstrumentation.exceptions.InvalidParametersException;
 import java.util.HashMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Builder
 public class ClassData {
-    @Getter
-    @Builder.Default
+    @Getter @Builder.Default
     private final HashMap<MethodData, SortedSet<Integer>> methods = new HashMap<>();
+
     private final String className;
     private static final Logger logger = LoggerFactory.getLogger(ClassData.class);
 
