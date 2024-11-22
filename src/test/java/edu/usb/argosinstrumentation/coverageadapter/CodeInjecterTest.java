@@ -1,4 +1,4 @@
-package edu.usb.argosinstrumentation.CoverageAdapter;
+package edu.usb.argosinstrumentation.coverageadapter;
 
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.*;
