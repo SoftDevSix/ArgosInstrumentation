@@ -1,16 +1,13 @@
 package edu.usb.argosinstrumentation.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
+@Builder
 @Getter
 public class MethodData {
     private final String name;
     private final String desc;
-
-    public MethodData(String name, String desc) {
-        this.name = name;
-        this.desc = desc;
-    }
 
     @Override
     public boolean equals(Object o) {

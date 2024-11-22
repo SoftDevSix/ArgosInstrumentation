@@ -10,7 +10,7 @@ class ClassDataTest {
 
     @Test
     void verifyEqualsComparison() {
-        ClassData classData = new ClassData("Example");
+        ClassData classData = ClassData.builder().className("Example").build();
         MethodData methodA = classData.createMethodData("<init>", "()V");
         MethodData methodB = classData.createMethodData("getGreeting", "()Ljava/lang/String");
         MethodData methodC = classData.createMethodData("false", "()V");
@@ -26,7 +26,7 @@ class ClassDataTest {
 
     @Test
     void verifySameKeyInsertion() {
-        ClassData classData = new ClassData("Example");
+        ClassData classData = ClassData.builder().className("Example").build();
         MethodData methodA = classData.createMethodData("<init>", "()V");
         classData.saveMethodData(methodA, 4);
         classData.saveMethodData(methodA, 4);
@@ -35,7 +35,7 @@ class ClassDataTest {
 
     @Test
     void verifyEmptyParametersMethodDataCreation() {
-        ClassData classData = new ClassData("Example");
+        ClassData classData = ClassData.builder().className("Example").build();
         try {
             classData.createMethodData("", "NotEmpty");
             fail();
