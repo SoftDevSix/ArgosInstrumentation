@@ -1,4 +1,4 @@
-package edu.usb.argosinstrumentation.CoverageAdapter;
+package edu.usb.argosinstrumentation.coverageadapter;
 
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.ClassVisitor;
@@ -11,7 +11,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class CoverageAdapterTest {
+class CoverageAdapterTest {
 
     @Test
     void testVisitMethodCreatesCodeInjecter() {

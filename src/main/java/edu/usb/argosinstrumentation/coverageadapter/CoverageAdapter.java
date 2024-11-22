@@ -1,6 +1,5 @@
-package edu.usb.argosinstrumentation.CoverageAdapter;
+package edu.usb.argosinstrumentation.coverageadapter;
 
-import lombok.Builder;
 import lombok.Getter;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;

@@ -1,4 +1,4 @@
-package edu.usb.argosinstrumentation.CoverageAdapter;
+package edu.usb.argosinstrumentation.coverageadapter;
 
 import lombok.Getter;
 import org.objectweb.asm.Label;
