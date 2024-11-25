@@ -1,6 +1,5 @@
 package edu.usb.argosinstrumentation.informationcollector;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,7 +24,8 @@ public class InformationCollectorTest {
         ClassVisitor mockClassVisitor = mock(ClassVisitor.class);
         ClassData mockClassData = mock(ClassData.class);
 
-        InformationCollector informationCollector = new InformationCollector(mockClassVisitor, mockClassData);
+        InformationCollector informationCollector =
+                new InformationCollector(mockClassVisitor, mockClassData);
 
         assertNotNull(informationCollector);
     }
@@ -34,21 +34,27 @@ public class InformationCollectorTest {
     void testVisitMethodPassesCorrectValuesToCounter() {
         ClassVisitor mockClassVisitor = mock(ClassVisitor.class);
         MethodVisitor mockMethodVisitor = mock(MethodVisitor.class);
-        when(mockClassVisitor.visitMethod(anyInt(), anyString(), anyString(), anyString(), any(String[].class)))
-            .thenReturn(mockMethodVisitor);
+        when(mockClassVisitor.visitMethod(
+                        anyInt(), anyString(), anyString(), anyString(), any(String[].class)))
+                .thenReturn(mockMethodVisitor);
 
         ClassData mockClassData = mock(ClassData.class);
-        InformationCollector informationCollector = new InformationCollector(mockClassVisitor, mockClassData);
+        InformationCollector informationCollector =
+                new InformationCollector(mockClassVisitor, mockClassData);
 
         int access = Opcodes.ACC_PRIVATE;
         String methodName = "calculate";
         String methodDesc = "(I)I";
         String signature = null;
-        String[] exceptions = new String[] { "java/lang/Exception" };
+        String[] exceptions = new String[] {"java/lang/Exception"};
 
-        MethodVisitor result = informationCollector.visitMethod(access, methodName, methodDesc, signature, exceptions);
+        MethodVisitor result =
+                informationCollector.visitMethod(
+                        access, methodName, methodDesc, signature, exceptions);
 
         assertNotNull(result, "The returned MethodVisitor should not be null.");
-        assertTrue(result instanceof Counter, "The returned MethodVisitor should be an instance of Counter.");        
+        assertTrue(
+                result instanceof Counter,
+                "The returned MethodVisitor should be an instance of Counter.");
     }
 }

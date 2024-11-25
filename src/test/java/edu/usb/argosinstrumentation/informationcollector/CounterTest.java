@@ -14,11 +14,11 @@ public class CounterTest {
         ClassWriter classWriter = new ClassWriter(0);
         classWriter.visit(
                 Opcodes.V1_8, Opcodes.ACC_PUBLIC, "TestClass", null, "java/lang/Object", null);
-        MethodVisitor originalMethodVisitor = classWriter.visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", null,
-                null);
+        MethodVisitor originalMethodVisitor =
+                classWriter.visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", null, null);
         originalMethodVisitor.visitCode();
 
-        ClassData data = new ClassData("TestClass");
+        ClassData data = ClassData.builder().className("TestClass").build();
         Counter injecter = new Counter(originalMethodVisitor, data, "testMethod", "()V");
 
         Label label = new Label();
