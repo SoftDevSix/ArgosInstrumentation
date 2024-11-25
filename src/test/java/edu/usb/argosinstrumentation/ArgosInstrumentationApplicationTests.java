@@ -19,7 +19,8 @@ class ArgosInstrumentationApplicationTests {
 
     @Test
     void main() {
-        assertDoesNotThrow(() -> ArgosInstrumentationApplication.main(new String[] {}),
+        assertDoesNotThrow(
+                () -> ArgosInstrumentationApplication.main(new String[] {}),
                 "The main method should execute without throwing exceptions.");
     }
 

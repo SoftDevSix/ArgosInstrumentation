@@ -15,7 +15,8 @@ public class CoverageAdapter extends ClassVisitor implements Opcodes {
     }
 
     @Override
-    public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+    public MethodVisitor visitMethod(
+            int access, String name, String desc, String signature, String[] exceptions) {
         MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
         return new CodeInjecter(mv, name, desc, className);
     }
