@@ -1,7 +1,12 @@
 package edu.usb.argosinstrumentation.coverageadapter;
 
 import org.junit.jupiter.api.Test;
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,6 +16,7 @@ class CodeInjecterTest {
     void testVisitLineNumber() {
         ClassWriter classWriter = new ClassWriter(0);
 
+        String methodTestName = "testMethod";
         // Setup of simulation
         classWriter.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, "TestClass", null, "java/lang/Object", null);
 
@@ -35,7 +41,7 @@ class CodeInjecterTest {
         classReader.accept(new ClassVisitor(Opcodes.ASM9) {
             @Override
             public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                if (name.equals("testMethod")) {
+                if ((methodTestName).equals(name)) {
                     return new MethodVisitor(Opcodes.ASM9) {
 
                         //visiting the injected line 42
