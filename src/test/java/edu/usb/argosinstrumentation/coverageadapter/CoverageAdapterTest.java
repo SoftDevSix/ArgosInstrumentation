@@ -1,14 +1,14 @@
 package edu.usb.argosinstrumentation.coverageadapter;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class CoverageAdapterTest {
@@ -22,7 +22,8 @@ class CoverageAdapterTest {
 
         CoverageAdapter adapter = new CoverageAdapter(mockCv, "TestClass");
 
-        MethodVisitor result = adapter.visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", null, null);
+        MethodVisitor result =
+                adapter.visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", null, null);
 
         assertNotNull(result);
         assertTrue(result instanceof CodeInjecter);
@@ -33,9 +34,16 @@ class CoverageAdapterTest {
         ClassVisitor mockCv = mock(ClassVisitor.class);
         CoverageAdapter adapter = new CoverageAdapter(mockCv, "TestClass");
 
-        adapter.visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", "signature", new String[]{"Exception"});
+        adapter.visitMethod(
+                Opcodes.ACC_PUBLIC, "testMethod", "()V", "signature", new String[] {"Exception"});
 
-        verify(mockCv).visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", "signature", new String[]{"Exception"});
+        verify(mockCv)
+                .visitMethod(
+                        Opcodes.ACC_PUBLIC,
+                        "testMethod",
+                        "()V",
+                        "signature",
+                        new String[] {"Exception"});
     }
 
     @Test
@@ -55,7 +63,9 @@ class CoverageAdapterTest {
 
         adapter.visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", null, null);
 
-        verify(mockCv).visitMethod(eq(Opcodes.ACC_PUBLIC), eq("testMethod"), eq("()V"), isNull(), isNull());
+        verify(mockCv)
+                .visitMethod(
+                        eq(Opcodes.ACC_PUBLIC), eq("testMethod"), eq("()V"), isNull(), isNull());
     }
 
     @Test

@@ -6,7 +6,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 @Getter
-public class CodeInjecter extends MethodVisitor implements Opcodes{
+public class CodeInjecter extends MethodVisitor implements Opcodes {
     private final String methodName;
     private final String methodDesc;
     private final String className;
