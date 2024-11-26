@@ -8,6 +8,7 @@ import lombok.Getter;
 public class MethodData {
     private final String name;
     private final String desc;
+    private static final int PERFECT_PRIME_NUMBER = 31;
 
     @Override
     public boolean equals(Object o) {
@@ -21,7 +22,12 @@ public class MethodData {
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + desc.hashCode();
+        result = PERFECT_PRIME_NUMBER * result + desc.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("name: %s, desc: %s", name, desc);
     }
 }
