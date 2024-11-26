@@ -1,5 +1,6 @@
 package edu.usb.argosinstrumentation.domain;
 
+import edu.usb.argosinstrumentation.LogMessages;
 import edu.usb.argosinstrumentation.exceptions.InvalidParametersException;
 import java.util.HashMap;
 import java.util.SortedSet;
@@ -20,11 +21,7 @@ public class ClassData {
 
     public MethodData createMethodData(String name, String desc) {
         if (name.isEmpty() || desc.isEmpty()) {
-            logger.atError()
-                    .log(
-                            String.format(
-                                    "Attempt to store empty.%n Method name: %s, Method desc: %s",
-                                    name, desc));
+            logger.atError().log(String.format(LogMessages.EMPTY_PARAMETER_VALUES, name, desc));
             throw new InvalidParametersException("Cannot accept empty names");
         }
 
@@ -42,7 +39,10 @@ public class ClassData {
 
         logger.atInfo().log(
                 String.format(
-                        "Stored method%nClass: %s%nMethod: %s %s%nAt line: %d",
-                        className, method.getName(), method.getDesc(), line));
+                        LogMessages.METHOD_STORAGE,
+                        className,
+                        method.getName(),
+                        method.getDesc(),
+                        line));
     }
 }
