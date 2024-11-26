@@ -1,16 +1,16 @@
-package edu.usb.argosinstrumentation.informationcollector;
+package edu.usb.argosinstrumentation.collector;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import edu.usb.argosinstrumentation.domain.ClassData;
-import edu.usb.argosinstrumentation.informationCollector.Counter;
+
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.*;
 
-public class CounterTest {
+class CounterTest {
 
     @Test
-    public void verifyVisitLineNumberMethod() {
+    void verifyVisitLineNumberMethod() {
         ClassWriter classWriter = new ClassWriter(0);
         classWriter.visit(
                 Opcodes.V1_8, Opcodes.ACC_PUBLIC, "TestClass", null, "java/lang/Object", null);

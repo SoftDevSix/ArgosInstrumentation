@@ -1,4 +1,4 @@
-package edu.usb.argosinstrumentation.informationcollector;
+package edu.usb.argosinstrumentation.collector;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,14 +9,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import edu.usb.argosinstrumentation.domain.ClassData;
-import edu.usb.argosinstrumentation.informationCollector.Counter;
-import edu.usb.argosinstrumentation.informationCollector.InformationCollector;
+
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class InformationCollectorTest {
+class InformationCollectorTest {
 
     @Test
     void testConstructorInitializesClassData() {

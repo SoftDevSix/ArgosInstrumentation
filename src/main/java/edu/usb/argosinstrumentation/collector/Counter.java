@@ -1,4 +1,4 @@
-package edu.usb.argosinstrumentation.informationCollector;
+package edu.usb.argosinstrumentation.collector;
 
 import edu.usb.argosinstrumentation.domain.ClassData;
 import edu.usb.argosinstrumentation.domain.MethodData;
