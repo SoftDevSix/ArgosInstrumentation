@@ -26,7 +26,7 @@ public class CodeInjecter extends MethodVisitor implements Opcodes {
         mv.visitIntInsn(SIPUSH, line);
         mv.visitMethodInsn(
                 INVOKESTATIC,
-                "driver/CoverageCollect",
+                "edu/usb/argosinstrumentation/transformer/CoverageCollector",
                 "collect",
                 "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V",
                 false);

@@ -73,7 +73,7 @@ class CodeInjecterTest {
                                         String descriptor,
                                         boolean isInterface) {
                                     assertEquals(
-                                            "driver/CoverageCollect",
+                                            "edu/usb/argosinstrumentation/transformer/CoverageCollector",
                                             owner,
                                             "class path has to be 'driver/CoverageCollect'.");
                                     assertEquals(
