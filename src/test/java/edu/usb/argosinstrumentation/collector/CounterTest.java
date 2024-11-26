@@ -3,7 +3,6 @@ package edu.usb.argosinstrumentation.collector;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import edu.usb.argosinstrumentation.domain.ClassData;
-
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.*;
 

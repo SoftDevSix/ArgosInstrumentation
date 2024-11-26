@@ -9,7 +9,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import edu.usb.argosinstrumentation.domain.ClassData;
-
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
