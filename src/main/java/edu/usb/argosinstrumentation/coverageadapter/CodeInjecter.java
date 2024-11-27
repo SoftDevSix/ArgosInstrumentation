@@ -23,7 +23,6 @@ public class CodeInjecter extends MethodVisitor implements Opcodes {
 
     @Override
     public void visitLineNumber(int line, Label start) {
-        System.out.println(collectorPath);
         mv.visitLdcInsn(className);
         mv.visitLdcInsn(methodName);
         mv.visitLdcInsn(methodDesc);

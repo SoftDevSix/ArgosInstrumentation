@@ -11,7 +11,7 @@ public class CoverageAdapter extends ClassVisitor implements Opcodes {
     private String className;
 
     @Value("${coverage.collector.path}")
-    private String collectorPath;
+    private String collectorPath = "";
 
     public CoverageAdapter(ClassVisitor cv, String className) {
         super(Opcodes.ASM5, cv);

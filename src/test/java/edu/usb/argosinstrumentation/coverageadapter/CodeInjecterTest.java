@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CodeInjecterTest {
 
     @Value("${coverage.collector.path}")
-    private String collectorPath;
+    private String collectorPath = "";
 
     private CodeInjecter codeInjecter;
 
