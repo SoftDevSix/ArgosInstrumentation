@@ -17,17 +17,19 @@ import org.junit.jupiter.api.Test;
 class CoverageCollectorTest {
 
     private Map<String, CoverageData> finalInfo;
+    private CoverageCollector coverageCollector;
     private static final Logger logger = Logger.getLogger(CoverageCollector.class.getName());
 
     @BeforeEach
     void setUp() {
         finalInfo = new HashMap<>();
-        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
         logger.setLevel(Level.ALL);
     }
 
     @Test
     void testCollect_withValidClassName() {
+
+        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
         String className = "TestClass";
         String methodName = "testMethod";
         String methodDesc = "desc";
@@ -38,7 +40,7 @@ class CoverageCollectorTest {
 
         finalInfo.put(className, mockCoverageData);
 
-        CoverageCollector.collect(className, methodName, methodDesc, line);
+        coverageCollector.collect(className, methodName, methodDesc, line);
 
         verify(mockCoverageData.getClassData(), times(1))
                 .saveMethodData(any(MethodData.class), eq(line));
@@ -51,10 +53,12 @@ class CoverageCollectorTest {
         String methodDesc = "desc";
         int line = 42;
 
+        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        CoverageCollector.collect(className, methodName, methodDesc, line);
+        coverageCollector.collect(className, methodName, methodDesc, line);
         System.out.println(logger.getName());
         String output = outputStream.toString().trim();
         assertTrue(output.contains("CoverageCollector"), "Expected: " + output);

@@ -7,18 +7,18 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class CoverageCollector {
 
     private static final Logger logger = Logger.getLogger(CoverageCollector.class.getName());
-    private static Map<String, CoverageData> finalInfo = new HashMap<>();
+    private Map<String, CoverageData> finalInfo = new HashMap<>();
 
-    public CoverageCollector(Map<String, CoverageData> finalInfo) {
-        CoverageCollector.finalInfo = finalInfo;
-    }
-
-    public static void collect(String className, String methodName, String mDesc, int line) {
+    public void collect(String className, String methodName, String mDesc, int line) {
         if (finalInfo.get(className) != null) {
             MethodData methodData = MethodData.builder().name(methodName).desc(mDesc).build();
             finalInfo.get(className).getClassData().saveMethodData(methodData, line);
