@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.springboot.starter)
     implementation(libs.asm)
     implementation(libs.logback)
+    implementation(libs.jackson.databind)
     implementation(libs.springboot.devtools)
     testImplementation(libs.springboot.starter.test)
     testRuntimeOnly(libs.junit.launcher)
