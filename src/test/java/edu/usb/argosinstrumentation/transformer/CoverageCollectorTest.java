@@ -17,13 +17,12 @@ import org.junit.jupiter.api.Test;
 class CoverageCollectorTest {
 
     private Map<String, CoverageData> finalInfo;
-    private CoverageCollector coverageCollector;
     private static final Logger logger = Logger.getLogger(CoverageCollector.class.getName());
 
     @BeforeEach
     void setUp() {
         finalInfo = new HashMap<>();
-        coverageCollector = new CoverageCollector(finalInfo);
+        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
         logger.setLevel(Level.ALL);
     }
 

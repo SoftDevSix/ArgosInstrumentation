@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(
         properties =
                 "coverage.collector.path=edu.usb.argosinstrumentation.transformer.CoverageCollector")
-public class CoverageTransformerTest {
+class CoverageTransformerTest {
 
     @Value("${coverage.collector.path}")
     private String collectorPath;
@@ -27,7 +27,7 @@ public class CoverageTransformerTest {
             "No se encontró la clase " + TEST_CLASS_NAME + " en el classpath";
 
     @Test
-    public void testPassOneNotNull() throws IOException {
+    void testPassOneNotNull() throws IOException {
         CoverageTransformer transformer = new CoverageTransformer(PROJECT_NAME);
         byte[] classBytes = getClassBytes(TEST_CLASS_NAME);
 
@@ -38,7 +38,7 @@ public class CoverageTransformerTest {
     }
 
     @Test
-    public void testPassTwoNotNull() throws IOException {
+    void testPassTwoNotNull() throws IOException {
         CoverageTransformer driver = new CoverageTransformer(PROJECT_NAME);
         byte[] classBytes = getClassBytes(TEST_CLASS_NAME);
 
@@ -47,7 +47,7 @@ public class CoverageTransformerTest {
     }
 
     @Test
-    public void testPassOneWithValidClassBytes() throws IOException {
+    void testPassOneWithValidClassBytes() throws IOException {
         CoverageTransformer transformer = new CoverageTransformer(PROJECT_NAME);
         byte[] classBytes = getClassBytes(TEST_CLASS_NAME);
 
@@ -59,7 +59,7 @@ public class CoverageTransformerTest {
     }
 
     @Test
-    public void testPassTwoWithValidClassBytes() throws IOException {
+    void testPassTwoWithValidClassBytes() throws IOException {
         CoverageTransformer driver = new CoverageTransformer(PROJECT_NAME);
 
         byte[] classBytes = getClassBytes(TEST_CLASS_NAME);
@@ -71,7 +71,7 @@ public class CoverageTransformerTest {
     }
 
     @Test
-    public void testPassOneWithClassDataOperations() throws IOException {
+    void testPassOneWithClassDataOperations() throws IOException {
         CoverageTransformer transformer = new CoverageTransformer(PROJECT_NAME);
         byte[] classBytes = getClassBytes(TEST_CLASS_NAME);
 

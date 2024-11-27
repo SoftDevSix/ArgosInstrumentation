@@ -15,7 +15,7 @@ public class CoverageCollector {
     private static Map<String, CoverageData> finalInfo = new HashMap<>();
 
     public CoverageCollector(Map<String, CoverageData> finalInfo) {
-        this.finalInfo = finalInfo;
+        CoverageCollector.finalInfo = finalInfo;
     }
 
     public static void collect(String className, String methodName, String mDesc, int line) {
