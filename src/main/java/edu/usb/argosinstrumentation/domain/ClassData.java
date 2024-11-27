@@ -16,7 +16,7 @@ public class ClassData {
     @Getter @Builder.Default
     private final HashMap<MethodData, SortedSet<Integer>> methods = new HashMap<>();
 
-    private final String className;
+    @Getter private final String className;
     private static final Logger logger = LoggerFactory.getLogger(ClassData.class);
 
     public MethodData createMethodData(String name, String desc) {

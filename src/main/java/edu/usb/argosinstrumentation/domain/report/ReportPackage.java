@@ -1,11 +1,13 @@
 package edu.usb.argosinstrumentation.domain.report;
 
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
+@Builder
 public class ReportPackage {
     private String name;
-    private List<ReportClass> reportClass;
+    @Builder.Default private List<ReportClass> reportClass = new ArrayList<>();
 }
