@@ -9,8 +9,16 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class CodeInjecterTest {
+
+    @Value("${coverage.collector.path}")
+    private String collectorPath;
+
+    private CodeInjecter codeInjecter;
 
     @Test
     void testVisitLineNumber() {
@@ -26,12 +34,13 @@ class CodeInjecterTest {
         originalMethodVisitor.visitCode();
 
         // Inject simulation of a TestClass with a testMethod with no aparemetrs
-        CodeInjecter injecter =
-                new CodeInjecter(originalMethodVisitor, "testMethod", "()V", "TestClass");
+        codeInjecter =
+                new CodeInjecter(
+                        originalMethodVisitor, "testMethod", "()V", "TestClass", collectorPath);
 
         // we are going to inject in 42 line of class
         Label label = new Label();
-        injecter.visitLineNumber(42, label);
+        codeInjecter.visitLineNumber(42, label);
 
         originalMethodVisitor.visitEnd();
         classWriter.visitEnd();
@@ -73,7 +82,7 @@ class CodeInjecterTest {
                                         String descriptor,
                                         boolean isInterface) {
                                     assertEquals(
-                                            "edu/usb/argosinstrumentation/transformer/CoverageCollector",
+                                            collectorPath.replace(".", "/"),
                                             owner,
                                             "class path has to be 'driver/CoverageCollect'.");
                                     assertEquals(
