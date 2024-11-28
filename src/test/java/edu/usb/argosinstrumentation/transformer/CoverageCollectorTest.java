@@ -28,7 +28,7 @@ class CoverageCollectorTest {
     @Test
     void testCollect_withValidClassName() {
 
-        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
+        CoverageCollector coverageCollector = new CoverageCollector();
         String className = "TestClass";
         String methodName = "testMethod";
         String methodDesc = "desc";
@@ -52,7 +52,7 @@ class CoverageCollectorTest {
         String methodDesc = "desc";
         int line = 42;
 
-        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
+        CoverageCollector coverageCollector = new CoverageCollector();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
