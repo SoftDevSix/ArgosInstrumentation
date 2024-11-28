@@ -29,7 +29,7 @@ public class CodeInjecter extends MethodVisitor implements Opcodes {
         mv.visitIntInsn(SIPUSH, line);
         mv.visitMethodInsn(
                 INVOKESTATIC,
-                collectorPath.replace(".",","),
+                collectorPath.replace(".", "/"),
                 "collect",
                 "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V",
                 false);
