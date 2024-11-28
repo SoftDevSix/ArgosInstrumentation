@@ -28,6 +28,7 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.jackson.databind)
     implementation(libs.springboot.devtools)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
     testImplementation(libs.springboot.starter.test)
     testRuntimeOnly(libs.junit.launcher)
 }
@@ -88,4 +89,28 @@ sonar {
         property("sonar.qualitygate.wait", "true")
         property("sonar.ignore.cognitive.complexity", "MethodData.equals")
     }
+}
+// Shadow Plugin Configuration
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveClassifier.set("all") // Genera un JAR completo con sufijo "-all"
+
+    manifest {
+        attributes(
+            "Premain-Class" to "edu.usb.argosinstrumentation.agent.Agent", // Clase principal del agente
+            "Main-Class" to "edu.usb.argosinstrumentation.agent.Agent"    // Clase main para ejecución
+        )
+    }
+
+    from(sourceSets.main.get().output)
+
+    mergeServiceFiles()
+}
+
+
+tasks.jar {
+    enabled = false // Disables the standard jar task to avoid conflicts
+}
+
+tasks.bootJar {
+    enabled = false // Ensures the fat jar is generated instead of the Spring Boot executable jar
 }
