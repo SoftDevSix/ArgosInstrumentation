@@ -4,15 +4,17 @@ import edu.usb.argosinstrumentation.collector.InformationCollector;
 import edu.usb.argosinstrumentation.coverageadapter.CoverageAdapter;
 import edu.usb.argosinstrumentation.domain.ClassData;
 import edu.usb.argosinstrumentation.domain.CoverageData;
+import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
 import lombok.RequiredArgsConstructor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 @RequiredArgsConstructor
-public class CoverageTransformer {
+public class CoverageTransformer implements ClassFileTransformer {
     private final String projectName;
 
+    @Override
     public byte[] transform(
             ClassLoader loader,
             String className,
