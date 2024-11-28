@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class CoverageTransformTest {
+class CoverageTransformTest {
     private CoverageTransformer coverageTransformer;
 
     @BeforeEach
