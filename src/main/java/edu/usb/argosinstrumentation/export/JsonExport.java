@@ -30,7 +30,7 @@ public class JsonExport implements IExport {
                         .build();
         populateStatements(statements, reportLineMap);
 
-        if (optionalCoveredStatements.isPresent()){
+        if (optionalCoveredStatements.isPresent()) {
             populateCoveredStatements(optionalCoveredStatements.get(), reportLineMap);
         }
 
@@ -60,7 +60,7 @@ public class JsonExport implements IExport {
                         entry.getKey(),
                         data.get(entry.getKey()).stream().toList(),
                         Optional.empty());
-            }else {
+            } else {
                 handleReportMethod(
                         reportClass,
                         entry.getKey(),
@@ -92,7 +92,7 @@ public class JsonExport implements IExport {
     }
 
     @Override
-    public void export(String projectName, HashMap<String, CoverageData> coverageData) {
+    public void export(String projectName, Map<String, CoverageData> coverageData) {
         Report report = Report.builder().name(projectName).build();
         handleReportPackage(report, coverageData);
         try {

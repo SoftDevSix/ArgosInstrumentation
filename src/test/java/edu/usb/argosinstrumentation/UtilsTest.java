@@ -22,10 +22,24 @@ class UtilsTest {
     }
 
     @Test
+    void verifyIncorrectPackageName() {
+        String className = "name";
+        String packageName = Utils.getPackageName(className);
+        assertEquals("name", packageName);
+    }
+
+    @Test
     void verifySourceFileName() {
         String className = "org/example/App";
         String sourceFileName = Utils.getSourceFileName(className);
         assertEquals("App.java", sourceFileName);
+    }
+
+    @Test
+    void verifyIncorrectSourceFileName() {
+        String className = "app";
+        String sourceFileName = Utils.getSourceFileName(className);
+        assertEquals("app", sourceFileName);
     }
 
     @Test

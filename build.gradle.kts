@@ -28,7 +28,7 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.jackson.databind)
     implementation(libs.springboot.devtools)
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
     testImplementation(libs.springboot.starter.test)
     testRuntimeOnly(libs.junit.launcher)
 }
