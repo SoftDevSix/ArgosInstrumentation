@@ -11,10 +11,7 @@ import edu.usb.argosinstrumentation.domain.MethodData;
 import edu.usb.argosinstrumentation.domain.report.*;
 import edu.usb.argosinstrumentation.exceptions.ExportException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
+import java.util.*;
 
 public class JsonExport implements IExport {
     public static final String EXPORT_PATH = "coverage.json";
@@ -23,7 +20,7 @@ public class JsonExport implements IExport {
             ReportClass reportClass,
             MethodData methodData,
             List<Integer> statements,
-            List<Integer> coveredStatements) {
+            Optional<List<Integer>> optionalCoveredStatements) {
         List<ReportMethod> methods = reportClass.getMethods();
         HashMap<Integer, ReportLine> reportLineMap = new HashMap<>();
         ReportMethod method =
@@ -32,11 +29,15 @@ public class JsonExport implements IExport {
                         .returnType(methodData.getDesc())
                         .build();
         populateStatements(statements, reportLineMap);
-        populateCoveredStatements(coveredStatements, reportLineMap);
+
+        if (optionalCoveredStatements.isPresent()){
+            populateCoveredStatements(optionalCoveredStatements.get(), reportLineMap);
+        }
 
         for (ReportLine reportLine : reportLineMap.values()) {
             method.getStatements().add(reportLine);
         }
+
         methods.add(method);
     }
 
@@ -53,11 +54,19 @@ public class JsonExport implements IExport {
                 coverageData.getProbeData().getMethods();
 
         for (Map.Entry<MethodData, SortedSet<Integer>> entry : data.entrySet()) {
-            handleReportMethod(
-                    reportClass,
-                    entry.getKey(),
-                    data.get(entry.getKey()).stream().toList(),
-                    probeData.get(entry.getKey()).stream().toList());
+            if (probeData.get(entry.getKey()) == null) {
+                handleReportMethod(
+                        reportClass,
+                        entry.getKey(),
+                        data.get(entry.getKey()).stream().toList(),
+                        Optional.empty());
+            }else {
+                handleReportMethod(
+                        reportClass,
+                        entry.getKey(),
+                        data.get(entry.getKey()).stream().toList(),
+                        Optional.of(probeData.get(entry.getKey()).stream().toList()));
+            }
         }
 
         reportClassList.add(reportClass);
