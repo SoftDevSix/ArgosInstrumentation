@@ -10,12 +10,15 @@ public class CodeInjecter extends MethodVisitor implements Opcodes {
     private final String methodName;
     private final String methodDesc;
     private final String className;
+    private String collectorPath;
 
-    public CodeInjecter(MethodVisitor mv, String name, String desc, String className) {
+    public CodeInjecter(
+            MethodVisitor mv, String name, String desc, String className, String collectorPath) {
         super(ASM5, mv);
         this.methodName = name;
         this.methodDesc = desc;
         this.className = className;
+        this.collectorPath = collectorPath;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class CodeInjecter extends MethodVisitor implements Opcodes {
         mv.visitIntInsn(SIPUSH, line);
         mv.visitMethodInsn(
                 INVOKESTATIC,
-                "driver/CoverageCollect",
+                collectorPath.replace(".", "/"),
                 "collect",
                 "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V",
                 false);
