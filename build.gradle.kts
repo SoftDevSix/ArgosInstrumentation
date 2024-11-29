@@ -28,6 +28,7 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.jackson.databind)
     implementation(libs.springboot.devtools)
+    implementation("com.fasterxml.jackson.core:jackson-databind")
     testImplementation(libs.springboot.starter.test)
     testRuntimeOnly(libs.junit.launcher)
 }
@@ -88,4 +89,28 @@ sonar {
         property("sonar.qualitygate.wait", "true")
         property("sonar.ignore.cognitive.complexity", "MethodData.equals")
     }
+}
+// Shadow Plugin Configuration
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveClassifier.set("all")
+
+    manifest {
+        attributes(
+            "Premain-Class" to "edu.usb.argosinstrumentation.agent.Agent",
+            "Main-Class" to "edu.usb.argosinstrumentation.agent.Agent"
+        )
+    }
+
+    from(sourceSets.main.get().output)
+
+    mergeServiceFiles()
+}
+
+
+tasks.jar {
+    enabled = false
+}
+
+tasks.bootJar {
+    enabled = false
 }

@@ -6,6 +6,7 @@ import edu.usb.argosinstrumentation.domain.MethodData;
 import edu.usb.argosinstrumentation.export.JsonExport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class ReportMethodTest {
@@ -19,7 +20,7 @@ class ReportMethodTest {
                 MethodData.builder().name("getGreeting").desc("()Ljava/lang/String;").build();
         List<Integer> statements = new ArrayList<>();
         statements.addAll(List.of(6, 7, 8, 9, 11, 12, 14));
-        List<Integer> coveredStatements = new ArrayList<>();
+        Optional<List<Integer>> coveredStatements = Optional.of(new ArrayList<>());
         statements.addAll(List.of(6, 11, 12, 14));
 
         export.handleReportMethod(sumClass, methodData, statements, coveredStatements);

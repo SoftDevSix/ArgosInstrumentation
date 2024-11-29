@@ -8,22 +8,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class CoverageCollector {
 
     private static final Logger logger = Logger.getLogger(CoverageCollector.class.getName());
-    private Map<String, CoverageData> finalInfo = new HashMap<>();
+    private static HashMap<String, CoverageData> finalInfo = new HashMap<>();
 
-    public void collect(String className, String methodName, String mDesc, int line) {
+    public static void collect(String className, String methodName, String mDesc, int line) {
         if (finalInfo.get(className) != null) {
             MethodData methodData = MethodData.builder().name(methodName).desc(mDesc).build();
-            finalInfo.get(className).getClassData().saveMethodData(methodData, line);
+            finalInfo.get(className).getProbeData().saveMethodData(methodData, line);
         } else {
             logger.log(Level.SEVERE, "finalInfo.get(className) is null at collectMethod");
         }
+    }
+
+    public Map<String, CoverageData> getFinalInfo() {
+        return finalInfo;
     }
 }

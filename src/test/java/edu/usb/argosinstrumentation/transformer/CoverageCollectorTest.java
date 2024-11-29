@@ -1,6 +1,8 @@
 package edu.usb.argosinstrumentation.transformer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import edu.usb.argosinstrumentation.domain.ClassData;
@@ -28,16 +30,18 @@ class CoverageCollectorTest {
     @Test
     void testCollect_withValidClassName() {
 
-        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
+        CoverageCollector coverageCollector = new CoverageCollector();
         String className = "TestClass";
         String methodName = "testMethod";
         String methodDesc = "desc";
         int line = 42;
 
         CoverageData mockCoverageData = mock(CoverageData.class);
-        when(mockCoverageData.getClassData()).thenReturn(mock(ClassData.class));
-
+        ClassData mockClassData = mock(ClassData.class);
+        when(mockCoverageData.getClassData()).thenReturn(mockClassData);
+        when(mockCoverageData.getProbeData()).thenReturn(mockClassData);
         finalInfo.put(className, mockCoverageData);
+        coverageCollector.getFinalInfo().put(className, mockCoverageData);
 
         coverageCollector.collect(className, methodName, methodDesc, line);
 
@@ -52,7 +56,7 @@ class CoverageCollectorTest {
         String methodDesc = "desc";
         int line = 42;
 
-        CoverageCollector coverageCollector = new CoverageCollector(finalInfo);
+        CoverageCollector coverageCollector = new CoverageCollector();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));

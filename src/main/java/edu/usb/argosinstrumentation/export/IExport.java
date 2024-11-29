@@ -1,8 +1,8 @@
 package edu.usb.argosinstrumentation.export;
 
 import edu.usb.argosinstrumentation.domain.CoverageData;
-import java.util.HashMap;
+import java.util.Map;
 
 public interface IExport {
-    void export(String projectName, HashMap<String, CoverageData> coverageData);
+    void export(String projectName, Map<String, CoverageData> coverageData);
 }

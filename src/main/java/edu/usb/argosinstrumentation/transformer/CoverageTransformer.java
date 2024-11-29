@@ -6,13 +6,16 @@ import edu.usb.argosinstrumentation.domain.ClassData;
 import edu.usb.argosinstrumentation.domain.CoverageData;
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 @RequiredArgsConstructor
+@Getter
 public class CoverageTransformer implements ClassFileTransformer {
     private final String projectName;
+    private CoverageCollector coverageCollector = new CoverageCollector();
 
     @Override
     public byte[] transform(
@@ -27,7 +30,6 @@ public class CoverageTransformer implements ClassFileTransformer {
             ClassData classData = ClassData.builder().className(className).build();
             byte[] ret = passOne(classfileBuffer, classData);
 
-            CoverageCollector coverageCollector = new CoverageCollector();
             ClassData probeData = ClassData.builder().className("probe_" + className).build();
             CoverageData coverageData =
                     CoverageData.builder().classData(classData).probeData(probeData).build();
