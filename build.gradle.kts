@@ -92,12 +92,12 @@ sonar {
 }
 // Shadow Plugin Configuration
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-    archiveClassifier.set("all") // Genera un JAR completo con sufijo "-all"
+    archiveClassifier.set("all")
 
     manifest {
         attributes(
-            "Premain-Class" to "edu.usb.argosinstrumentation.agent.Agent", // Clase principal del agente
-            "Main-Class" to "edu.usb.argosinstrumentation.agent.Agent"    // Clase main para ejecución
+            "Premain-Class" to "edu.usb.argosinstrumentation.agent.Agent",
+            "Main-Class" to "edu.usb.argosinstrumentation.agent.Agent"
         )
     }
 
@@ -108,9 +108,9 @@ tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
 
 
 tasks.jar {
-    enabled = false // Disables the standard jar task to avoid conflicts
+    enabled = false
 }
 
 tasks.bootJar {
-    enabled = false // Ensures the fat jar is generated instead of the Spring Boot executable jar
+    enabled = false
 }
